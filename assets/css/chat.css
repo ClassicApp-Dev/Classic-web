@@ -130,41 +130,19 @@
   bottom: 0;
   right: 10%;
 }
-
 .number-badge {
+  height: auto;
+  width: -moz-fit-content;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  width: fit-content;
+  background-color: var(--app-maroon);
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px;
   position: relative;
   left: 50%;
   right: 0;
-  background-color: var(--app-maroon);
-  border-radius: 3em;
-  -moz-border-radius: 3em;
-  -webkit-border-radius: 3em;
-  color: #ffffff;
-  height: 1.8em;
-  width: 1.8em;
-  display: inline-block;
-  font-family: "Roboto", Helvetica, Sans-serif;
-  font-size: 11px;
-  line-height: 2em;
-  text-align: center;
-}
-
-.circleOrange:hover {
-  background: #ff5a00;
-  -webkit-transition: all 200ms ease-in-out;
-  -moz-transition: all 200ms ease-in-out;
-  -o-transition: all 200ms ease-in-out;
-  -ms-transition: all 200ms ease-in-out;
-  transition: all 200ms ease-in-out;
-}
-
-.pag {
-  font-size: 14px;
-  color: #9b9b9b;
-  text-decoration: none;
-  font-family: Roboto;
-  background: #f2f2f2;
-  padding: 10px;
 }
 
 .messages-head span {
@@ -211,7 +189,7 @@
   height: 65vh;
   padding: 10px 0;
   /* width: 100%; */
-  max-width: 800px;
+  max-width: 700px;
   /* margin: 25px 10px; */
 }
 
