@@ -121,6 +121,9 @@
                       class="form-control"
                       placeholder="Enter verification code here"
                       name="code"
+                      required
+                      oninvalid="this.setCustomValidity('Please enter verification code')"
+                      oninput="this.setCustomValidity('')" 
                     />
                   </div>
                 </div>

@@ -117,6 +117,9 @@
                       class="form-control"
                       placeholder="UserName"
                       name="username"
+                      required
+                      oninvalid="this.setCustomValidity('Please Enter username')"
+                      oninput="this.setCustomValidity('')" 
                     />
                   </div>
                 </div>
@@ -128,6 +131,9 @@
                       class="form-control"
                       placeholder="E.g example@gmail.com"
                       name="email"
+                      required
+                      oninvalid="this.setCustomValidity('Email Address Is Important')"
+                      oninput="this.setCustomValidity('')" 
                     />
                   </div>
                 </div>
@@ -142,12 +148,12 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-12">
-                    <label for="gender">Date Of Birth</label>
+                    <label for="dob">Date Of Birth</label>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-lg-12">
-                    <input class="form-control" placeholder="dd-mm-yyyy" type="date" name="dob" />
+                    <input class="form-control" placeholder="dd-mm-yyyy" type="date" name="dob" required oninvalid="this.setCustomValidity('Please select date of birth')"  oninput="this.setCustomValidity('')" />
                   </div>
                   <!-- <div class="col-lg-4 col-sm-12 col-xs-12">
                     <select class="form-control">
@@ -189,6 +195,9 @@
                       class="form-control"
                       placeholder="Password"
                       name="password"
+                      required
+                      oninvalid="this.setCustomValidity('Please input password')"
+                      oninput="this.setCustomValidity('')" 
                     />
                   </div>
                 </div>
@@ -200,6 +209,9 @@
                       class="form-control"
                       placeholder="Retype Password"
                       name="confirm"
+                      required
+                      oninvalid="this.setCustomValidity('Please confirm password')"
+                      oninput="this.setCustomValidity('')" 
                     />
                   </div>
                 </div>

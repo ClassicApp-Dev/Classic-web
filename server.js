@@ -6,6 +6,11 @@ const app = express()
 const userRoute = require("./routes/user.route")
 const api = require("./routes/api")
 const session = require("express-session")
+const bodyParser = require('body-parser');
+const redis = require('redis');
+const redisStore = require('connect-redis')(session);
+const client  = redis.createClient();
+
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -15,11 +20,20 @@ app.use(express.static("public"));
 app.set('trust proxy', 1);
 
 app.use(session({
-    secret: 'classic',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {}
-  }))
+  secret: 'classicapp',
+  // this creates new redis store\|/ \|/ \|/ \|/.
+  store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl : 260}),
+  saveUninitialized: false,
+  resave: false
+}));
+
+// app.use(session({
+//     secret: 'classic',
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {}
+//   }))
+
 
 app.use(userRoute);
 app.use(api)

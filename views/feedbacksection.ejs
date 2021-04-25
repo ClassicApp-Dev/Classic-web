@@ -1,0 +1,106 @@
+<!--feedback section-->
+         
+          <div class="chat-messages_2">
+            <div class="chat-container">
+              <div class="messages-head d-flex justify-content-between">
+                <div class="d-flex">
+                  <div class="chat-block_flex">
+                    <div class="pl-2">
+                      <strong>Feedback@classic</strong>
+                    </div>
+                  </div>
+                </div>
+                <div class="grey-icons" style="font-size: 20px">
+                  <span
+                    class="iconify"
+                    data-icon="ph:dots-three-vertical-bold"
+                    data-inline="false"
+                  ></span>
+                </div>
+              </div>
+              <hr />
+
+               
+              <div class="message-box">
+                <div class="">
+                 
+                  <% if( feedback.length>0){ %>
+                    <% for(var i = 0; i<feedback.length; i++ ){ %>
+                  <div class="feedback-msg">
+                    <span
+                      >
+                      <%= feedback[i].message %>
+                      </span
+                    >
+                    <p class="time-stamp pt-4"> <%= feedback[i].timeString %></p>
+                  </div>
+                  <br>
+                  <% } %>
+                  <% }else{ %>
+                      <h6 style="text-align: center;padding-top: 10px;"> no feedback sent
+             <% } %> 
+
+                  <!-- <div class="reply-msg">
+                    <span>We (Classic) have received the feedback</span>
+                  </div> -->
+                </div>
+              </div>
+                      
+              <div class="type-box">
+                <div class="type-container">
+                  <div class="type-group">
+                    <form id="image-form">
+                      <label
+                        class="attach-img"
+                        id="image-upload-label"
+                        for="file-upload"
+                      >
+                        <input
+                          accept="image/*"
+                          name="picture"
+                          type="file"
+                          id="file-upload"
+                          name=""
+                        />
+
+                        <span
+                          class="iconify"
+                          data-icon="subway:pin"
+                          data-inline="false"
+                        ></span>
+                      </label>
+                    </form>
+                    <div class="pr-4"></div>
+                    <form  method="POST" action="/sendfeedback" >
+                    <div class="d-flex fake-text-field">
+                      <div id="emoji">
+                        <span
+                          class="iconify"
+                          data-icon="ph:smiley-fill"
+                          data-inline="false"
+                        ></span>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Type your message here"
+                        class="text-field"
+                        name="message"
+                      />
+                      <div>
+                        <!-- add onclick function to send message -->
+                         <button style=" border: 0px white; background-color:transparent;"> <span
+                          class="iconify"
+                          data-icon="fluent:send-24-filled"
+                          data-inline="false"
+                          onclick= "submitFeedback()"
+                        ></span>
+                        </button>
+                      </div>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <script src="assets/js/custom2.js"></script>
