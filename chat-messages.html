@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/chat.css" />
@@ -22,17 +22,12 @@
         <div class="chat-flex">
           <div class="chat-left-side">
             <div class="chat-head">
-              <div class="logo">
-                <img
-                  id="logo"
-                  src="assets/images/1.png"
-                  class="img-fluid"
-                  alt=""
-                />
+              <div>
+                <img src="assets/images/1.png" class="img-fluid" alt="" />
               </div>
               <div class="chat-head-icons">
-                <div class=""><img src="assets/svgs/add.svg" alt="" /></div>
-                <div class="d-flex">
+                <div><img src="assets/svgs/add.svg" alt="" /></div>
+                <div class="search-bar">
                   <img
                     class="search-icon"
                     src="assets/svgs/Icons-search-gray.svg"
@@ -139,7 +134,7 @@
                         <div>
                           <figcaption><b>11:00PM</b></figcaption>
                           <figcaption>
-                            <div class="number-badge">113</div>
+                            <a href="#"><span class="number-badge">2</span></a>
                           </figcaption>
                         </div>
                       </div>
@@ -1179,7 +1174,7 @@
               <hr />
 
               <div class="message-box">
-                <div class="">
+                <div class="msnger-chat">
                   <div class="message d-flex sending-end">
                     <div>
                       <img
@@ -1200,7 +1195,7 @@
                       <p class="time-stamp">Halpert|11:30pm</p>
                     </div>
                   </div>
-                  <div class="message d-flex receiving-end">
+                  <div class="d-flex receiving-end">
                     <div style="align-self: center">
                       <figcaption class="message-chat">
                         <span> We have to Assign A new Member </span>
@@ -1281,7 +1276,7 @@
                         placeholder="Type your messages"
                         class="text-field"
                       />
-                      <div>
+                      <div id="sendMessage">
                         <!-- add onclick function to send message -->
                         <span
                           class="iconify"
