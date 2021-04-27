@@ -146,6 +146,19 @@ div.body-container {
     display: block;
   }
 
+  .dnone {
+    display: none;
+  }
+
+  .dropdown-menu.show {
+    position: fixed !important;
+    transform: translate(0px, 0px) !important;
+    width: fit-content;
+    top: 0px !important;
+    left: 40% !important;
+    will-change: transform;
+  }
+
   .chat-flex .chat-left-side {
     display: none;
   }
