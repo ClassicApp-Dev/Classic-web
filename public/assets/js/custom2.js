@@ -1,5 +1,7 @@
 function submitFeedback (){
-    // console.log("gotten")
-    $("#feedbackform").submit();
-    // console.log("gottedd")
+
 }
+
+
+var mbb = document.getElementsByClassName('message-box')[0];
+mbb.scrollTop = mbb.scrollHeight;

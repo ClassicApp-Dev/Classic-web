@@ -32,6 +32,7 @@ route.get("/chat-interest",async(req,res)=>{
                 interests:response.allInterests,
                 joined:response.joinedInterests,
                 storeData:response.joinedInterestsData,
+                // storedinterest:response.joinedinterestdata==response.joinedInterests
             });
         });
     }else{
@@ -92,6 +93,7 @@ route.get("/feedback",async(req,res)=>{
                         coverphoto:sess.coverPhoto,
                         description:sess.description,
                         location:sess.location,
+                        token:sess.token,
                         subRoute:'feedbacksection.ejs',
                         interests:response.allInterests,
                         joined:response.joinedInterests,
@@ -171,9 +173,49 @@ route.get("/base", (req,res)=>{
         res.redirect("/login")
     }
 });
-// route.get("/sendfeedback",(req,res)=>{
-//     res.redirect("/feedback")
+// route.get("/feedbackk",(req,res)=>{
+//     res.render("feedbacksection",{
+//         feedback:allFeedback,  
+//     })
 // });
+
+
+route.get("/feedbackk",async(req,res)=>{
+    
+    var sess = req.session;
+    if (sess.token){        
+                var allFeedback = [];
+                await feedback.getAllfeedbacks(req.session,(error,resp)=>{
+                    if(!error){
+                          for(var i in resp.data){
+                            var datetime = new Date(resp.data[i].time);
+                            var newDate = datetime.toLocaleString()
+                                               
+                            resp.data[i]['timeString'] = newDate;
+                            
+                        }
+
+                        allFeedback = resp.data;
+                    }
+                    res.render("base2",{
+                        email:sess.email, 
+                        username:sess.username,
+                        profilePhoto:sess.profilePhoto,
+                        coverphoto:sess.coverPhoto,
+                        description:sess.description,
+                        location:sess.location,
+                        token:sess.token,
+                        subRoute:'feedbacksection.ejs',
+                        interests:response.allInterests,
+                        joined:response.joinedInterests,
+                        feedback:allFeedback,
+                        datetime:datetime.toLocaleString()
+                    });
+                });
+    }else{
+        res.redirect("/login")
+    }
+});
 
 
 module.exports = route;

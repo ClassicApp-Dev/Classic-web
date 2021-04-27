@@ -102,10 +102,6 @@ route.post("/sendfeedback",urlencodedParser,(req,res)=>{
             console.log("error at feedback api")
            res.redirect('/feedback');
         }else{
-            var sess = req.session;
-            sess.feedback = details.message;
-            sess.token = response.token;
-            // console.log("feedback working");
             res.redirect("/feedback");
         }
     });``

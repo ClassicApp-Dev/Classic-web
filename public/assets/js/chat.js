@@ -45,6 +45,8 @@
         return item;
     }
    
+
+
     socket.on('message', function (data) {
       var interestStore = JSON.parse(localStorage.getItem('interestStore'));
 
@@ -194,3 +196,21 @@
       }
 
     });
+
+
+    //Fetch initial interest messages
+    var interestStore = JSON.parse(localStorage.getItem('interestStore'));
+    for(var i in Object.keys(interestStore)){
+      $.get('/getInterestMessages/'+Object.keys(interestStore)[i],function(data,status){
+        data.sort(function(a, b) {
+          var keyA = eval(a.datetime);
+           var  keyB = eval(b.datetime);
+          // Compare the 2 dates
+          if (keyA < keyB) return -1;
+          if (keyA > keyB) return 1;
+          return 0;
+        });
+        interestStore[Object.keys(interestStore)[i]]['interestMessages'] = data;
+        localStorage.setItem('interestStore',JSON.stringify(interestStore));
+      });
+    }
