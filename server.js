@@ -24,7 +24,8 @@ app.use(session({
   // this creates new redis store\|/ \|/ \|/ \|/.
   store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl : 260}),
   saveUninitialized: false,
-  resave: false
+  resave: false,
+  expires: new Date(Date.now() + (30 * 86400 * 1000))
 }));
 
 // app.use(session({

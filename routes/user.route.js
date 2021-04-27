@@ -13,6 +13,10 @@ const e = require("express");
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false});
 
+route.get("/",async(req,res)=>{
+    res.render('index');
+});
+
 
 route.get("/chat-interest",async(req,res)=>{
     // var online = await sessionManager.getSession();
@@ -20,6 +24,8 @@ route.get("/chat-interest",async(req,res)=>{
     if (sess.token){
         await interest.loadInterestData({token:sess.token,_id:sess._id}, async (err,response)=>{
             sess.joinedInterestsData = response.joinedInterestsData;
+            sess.allInterests = response.allInterests;
+            sess.joined = response.joinedInterests;
             res.render("base",{
                 email:sess.email, 
                 username:sess.username,
@@ -32,7 +38,7 @@ route.get("/chat-interest",async(req,res)=>{
                 interests:response.allInterests,
                 joined:response.joinedInterests,
                 storeData:response.joinedInterestsData,
-                // storedinterest:response.joinedinterestdata==response.joinedInterests
+                // storedinterest:response.joinedinterestdata=response.joinedInterests
             });
         });
     }else{
@@ -69,38 +75,36 @@ route.get("/chat-messages/:interest",async(req,res)=>{
 route.get("/feedback",async(req,res)=>{
     // var online = await sessionManager.getSession();
     var sess = req.session;
-    if (sess.token){        
-        await interest.loadInterestData({token:sess.token,_id:sess._id}, async (err,response)=>{
-                var allFeedback = [];
-                await feedback.getAllfeedbacks(req.session,(error,resp)=>{
-                    if(!error){
-                        // console.log(resp);
-                        for(var i in resp.data){
-                            var datetime = new Date(resp.data[i].time);
-                            var newDate = datetime.toLocaleString()
-                            
-                            // resp.data[i].time = newDate;
-                            resp.data[i]['timeString'] = newDate;
-                            // console.log(ddate);
-                        }
+    if (sess.token){       
+        var allFeedback = [];
+        await feedback.getAllfeedbacks(req.session,(error,resp)=>{
+            if(!error){
+                // console.log(resp);
+                for(var i in resp.data){
+                    var datetime = new Date(resp.data[i].time);
+                    var newDate = datetime.toLocaleString()
+                    
+                    // resp.data[i].time = newDate;
+                    resp.data[i]['timeString'] = newDate;
+                    // console.log(ddate);
+                }
 
-                        allFeedback = resp.data;
-                    }
-                    res.render("base",{
-                        email:sess.email, 
-                        username:sess.username,
-                        profilePhoto:sess.profilePhoto,
-                        coverphoto:sess.coverPhoto,
-                        description:sess.description,
-                        location:sess.location,
-                        token:sess.token,
-                        subRoute:'feedbacksection.ejs',
-                        interests:response.allInterests,
-                        joined:response.joinedInterests,
-                        feedback:allFeedback,
-                        datetime:datetime.toLocaleString()
-                    });
-                });
+                allFeedback = resp.data;
+            }
+            res.render("base",{
+                email:sess.email, 
+                username:sess.username,
+                profilePhoto:sess.profilePhoto,
+                coverphoto:sess.coverPhoto,
+                description:sess.description,
+                location:sess.location,
+                token:sess.token,
+                subRoute:'feedbacksection.ejs',
+                interests:req.session.allInterests,
+                joined:req.session.joined,
+                feedback:allFeedback,
+                datetime:datetime.toLocaleString()
+            });
         });
     }else{
         res.redirect("/login")
@@ -116,7 +120,7 @@ route.get("/login",async (req,res)=>{
     console.log(req.session);
     var sess= req.session;
     if (sess.token){
-        res.redirect("/profile")
+        res.redirect("/chat-interest")
     }else{
         var data ={message:false};
         if(req.query.e){
@@ -129,20 +133,18 @@ route.get("/login",async (req,res)=>{
 route.get("/profile",async(req,res)=>{
     var sess = req.session;
     if (sess.token){
-        await interest.loadInterestData({token:sess.token,_id:sess._id}, async (err,response)=>{
-            console.log(sess.profilePhoto)
-            res.render("base",{
-                email:sess.email, 
-                username:sess.username,
-                avatarPhoto:sess.avatarPhoto,
-                coverPhoto:sess.coverPhoto,
-                location:sess.location,
-                description:sess.description,
-                token:sess.token,
-                subRoute:'profilesection.ejs',
-                interests:response.allInterests,
-                joined:response.joinedInterests
-            });
+        console.log(sess.profilePhoto)
+        res.render("base",{
+            email:sess.email, 
+            username:sess.username,
+            avatarPhoto:sess.avatarPhoto,
+            coverPhoto:sess.coverPhoto,
+            location:sess.location,
+            description:sess.description,
+            token:sess.token,
+            subRoute:'profilesection.ejs',
+            interests:req.session.allInterests,
+            joined:req.session.joined,
         });
     }else{
         res.redirect("/login")

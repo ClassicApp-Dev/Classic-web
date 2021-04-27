@@ -127,7 +127,7 @@
 
                       <% for(var i = 0; i<joined.length; i++ ){ %>
                         <!--<a href="/chat-messages/<%= joined[i].interest_name %>" class="link-to-page">-->
-                          <a href="#!" data-interest="<%= joined[i].interest_id %>" class="link-to-page open-chat">
+                          <a href="javascript:void()" data-interest="<%= joined[i].interest_id %>" class="link-to-page open-chat">
                           <div class="chat-block" data-interest='<%= joined[i].interest_id %>'>
                             <div class="chat-block_flex">
                               <div class="chat-block_flex_img_container">
@@ -136,7 +136,7 @@
                                   class="img-fluid"
                                   alt="chat-logo"
                                 />
-                                <span class="total-members"><%= joined[i].memberCount %> </span>
+                                <span class="total-members" data-interest="<%= joined[i].interest_id %>"><%= joined[i].memberCount %> </span>
                               </div>
                               <div>
                                

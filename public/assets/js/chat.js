@@ -9,7 +9,7 @@
     console.log("got to the chat part")
    
    
-   
+    var loadMembers;
     function generateChat(align,data){
       var datetime = new Date(data.time);
       var hrs = (datetime.getHours().toString().length>1)?datetime.getHours().toString():('0'+datetime.getHours().toString());
@@ -76,6 +76,52 @@
         
         localStorage.setItem('interestStore',JSON.stringify(interestStore));
       
+    });
+
+    socket.on('interestJoin',function(data){
+      var interestStore = JSON.parse(localStorage.getItem('interestStore'));
+      var currentCount = $('.total-members[data-interest='+data.interestId+']').html();
+      $('.total-members[data-interest='+data.interestId+']').html((eval(currentCount)+1));
+
+      if(localStorage.getItem('activeInterest')==data.interestId){
+        $('.member-count').html( eval($('.member-count').html()) + 1);
+      }
+      interestStore[data.interestId].interestMembers.push({username:data.username,alias:data.alias});
+      loadMembers(interestStore[data.interestId].interestMembers);
+      localStorage.setItem('interestStore',JSON.stringify(interestStore));
+    });
+
+    socket.on('interestLeave',function(data){
+      var currentCount = $('.total-members[data-interest='+data.interestId+']').html();
+      $('.total-members[data-interest='+data.interestId+']').html((eval(currentCount)-1));
+
+      if(localStorage.getItem('activeInterest')==data.interestId){
+        $('.member-count').html( eval($('.member-count').html()) - 1);
+        $('.online-count').html( eval($('.online-count').html()) - 1);
+      }
+
+      interestStore[data.interestId].onlineMembers-= 1;
+      localStorage.setItem('interestStore',JSON.stringify(interestStore));
+    });
+
+    socket.on('isOnline',function(data){
+
+      if(localStorage.getItem('activeInterest')==data.interestId){
+        $('.online-count').html( eval($('.online-count').html()) + 1);
+      }
+
+      interestStore[data.interestId].onlineMembers += 1;
+      localStorage.setItem('interestStore',JSON.stringify(interestStore));
+    });
+
+    socket.on('isOffline',function(data){
+
+      if(localStorage.getItem('activeInterest')==data.interestId){
+        $('.online-count').html( eval($('.online-count').html()) - 1);
+      }
+
+      interestStore[data.interestId].onlineMembers -= 1;
+      localStorage.setItem('interestStore',JSON.stringify(interestStore));
     });
    
     function sendMessage(){
@@ -163,34 +209,39 @@
         $('.chat-block[data-interest='+interest_id+']').addClass('active');
         $('.interest-title').html(interestData.interestName);
         $('.member-count').html(interestData.interestMembers.length);
-        $('.online-count').html(interestData.onlineMembers);
+        $('.online-count').html(interestData.onlineMembers-1);
 
         //Load Interest Members List
-        $('.member-list').html('');
-        for(var i in interestData.interestMembers){
-          $('.member-list').html( $('.member-list').html() + `                
-          <div class="chat-block">
-          <div class="chat-block_flex_between pl-3 pr-3">
-            <div class="d-flex">
-              <div class="chat-block_flex_img_container">
-                <img
-                  src="/assets/images/chat-img.png"
-                  class="img-fluid member-img"
-                  alt="chat-logo"
-                />
+        
+        loadMembers = function(data){
+          $('.member-list').html('');
+          for(var i in data){
+            $('.member-list').html( $('.member-list').html() + `                
+            <div class="chat-block">
+            <div class="chat-block_flex_between pl-3 pr-3">
+              <div class="d-flex">
+                <div class="chat-block_flex_img_container">
+                  <img
+                    src="/assets/images/chat-img.png"
+                    class="img-fluid member-img"
+                    alt="chat-logo"
+                  />
+                </div>
+                <strong class="strong member-name pl-2"> `+data[i].alias+` </strong>
               </div>
-              <strong class="strong member-name pl-2"> `+interestData.interestMembers[i].alias+` </strong>
+              <div class="profile-more">
+                <span
+                  class="iconify"
+                  data-icon="fe:arrow-right"
+                  data-inline="false"
+                ></span>
+              </div>
             </div>
-            <div class="profile-more">
-              <span
-                class="iconify"
-                data-icon="fe:arrow-right"
-                data-inline="false"
-              ></span>
-            </div>
-          </div>
-        </div>`);
+          </div>`);
+          }
         }
+        loadMembers(interestData.interestMembers);
+
       }else{
         window.location.replace('/chat-interest');
       }
