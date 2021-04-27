@@ -26,6 +26,26 @@ const profileFunctions = {
         }                 
     });
     },
+
+    updateprofilecover : async function(param, callback) {
+        axios.post("http://50.18.102.80:3000/users/profile",{type:"upload" , coverPhoto:param.coverPhoto},{
+        httpsAgent: httpsAgent,
+        headers:{ 
+            Authorization : 'Bearer '+param.token},
+        // test part \/\/\/\/\/\/\/\/\/\/\/\/
+            'accept': 'application/json',
+            'Content-Type': 'multipart/form-data',
+    }).then((response)=>{
+        callback(false,response.data);
+    }).catch((err)=>{
+        console.log(err)
+        if(err.response.data){
+            callback(err.response.data,false)
+        }else{
+            callback({error:1, message:"error encountered"},false)
+        }                 
+    });
+    },
 };
 
 module.exports = profileFunctions

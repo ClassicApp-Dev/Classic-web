@@ -115,6 +115,10 @@
   background: #f3f3f3;
 }
 
+.chat-block.active {
+  background: #f3f3f3;
+}
+
 .chat-block_flex_img_container {
   position: relative;
 }

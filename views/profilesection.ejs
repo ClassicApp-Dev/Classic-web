@@ -2,7 +2,7 @@
           <!-- profile  section -->
           <div class="chat-messages_2 profile">
             <div class="cover-img" id="coverP">
-              <p id="coverPath" style="display: none;"> <%= coverphoto %></p>
+              <p id="coverPath" style="display: none;"> <%= coverPhoto %></p>
               <div class="profile-icons">
                 <div class="profile-icons-more dropdown">
                   <div
@@ -43,17 +43,18 @@
                   </div>
                 </div>
                 <div class="profile-icons-edit-cover">
-                  <form action="post" id="cover-img-form"></form>
+                  <form method="POST" action="/updateprofilecover" id="cover-img-form">
                   <label for="file-upload">
                     <input
                       accept="image/*"
-                      name="picture"
+                      name="coverPhoto"
                       type="file"
                       id="cover-upload"
-                      name=""
-                    />
+                      
+                     />
                   </label>
                   <img src="assets/svgs/yellow-edit.svg" alt="" />
+                  </form>
                 </div>
               </div>
               <div class="profile-img-container">
@@ -101,7 +102,7 @@
                 <div class="description-flex profile-description">
                   <div>
                   <figcaption class="edit-option">
-                    <span>Edit Description</span>
+                    <span>Description</span>
                   </figcaption>
                   <p class="details"> <%= description %> 
                   </p>

@@ -23,8 +23,6 @@ const loginFunctions = {
         }).then((response)=>{            
             callback(false,response.data);
         }).catch((err)=>{
-            
-            console.log(err)
             if(err.response.data){
                 callback(err.response.data,false)
             }else{

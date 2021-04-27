@@ -7,15 +7,15 @@
                   <div class="chat-block_flex">
                     <div class="chat-block_flex_img_container">
                       <img
-                        src="assets/images/chat-img.png"
+                        src="/assets/images/chat-img.png"
                         class="img-fluid"
                         alt="chat-logo"
                       />
                     </div>
                     <div class="pl-2">
-                      <strong>Sport</strong>
+                      <strong><%= interestData.interestName %></strong>
                       <figcaption class="chat-intro">
-                        <span>6 members , </span><span> 52 online</span>
+                        <span><%= interestData.interestMembers.length %> members , </span><span> <%= interestData.onlineMembers %> online</span>
                       </figcaption>
                     </div>
                   </div>
@@ -24,7 +24,7 @@
                   <div class="search-bar">
                     <!-- <img
                       class="search-icon"
-                      src="assets/svgs/Icons-search-gray.svg"
+                      src="/assets/svgs/Icons-search-gray.svg"
                       alt=""
                     /> -->
                     <div class="chat-search-icon">
@@ -43,7 +43,7 @@
                       />
                       <img
                         style="align-self: baseline"
-                        src="assets/svgs/tick.svg"
+                        src="/assets/svgs/tick.svg"
                         alt=""
                       />
                     </form>
@@ -98,75 +98,26 @@
               </div>
               <hr />
 
+
+
+
+              <!-- message part -->
+
               <div class="message-box">
-                <div class="">
-                  <div class="message d-flex sending-end">
-                    <div>
-                      <img
-                        src="assets/images/63.png"
-                        height="28"
-                        width="28"
-                        alt=""
-                      />
-                    </div>
-                    <div style="align-self: center">
-                      <figcaption class="message-chat">
-                        <span> We have to Assign A new Member </span>
-                      </figcaption>
+                <div class="messagebody" id="messagebody">                 
 
-                      <figcaption class="message-chat">
-                        <span> We have to Assign A new Member </span>
-                      </figcaption>
-                      <p class="time-stamp">Halpert|11:30pm</p>
-                    </div>
-                  </div>
-                  <div class="message d-flex receiving-end">
-                    <div style="align-self: center">
-                      <figcaption class="message-chat">
-                        <span> We have to Assign A new Member </span>
-                      </figcaption>
-
-                      <figcaption class="message-chat">
-                        <span> We have to Assign A new Member </span>
-                      </figcaption>
-                      <p class="time-stamp">Halpert|11:30pm</p>
-                      <div class="text-right">
-                        <img
-                          src="assets/images/64.png"
-                          height="28"
-                          width="28"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="message d-flex sending-end">
-                    <div>
-                      <img
-                        src="assets/images/63.png"
-                        height="28"
-                        width="28"
-                        alt=""
-                      />
-                    </div>
-                    <div style="align-self: center">
-                      <figcaption class="message-chat">
-                        <span> We have to Assign A new Member </span>
-                      </figcaption>
-
-                      <figcaption class="message-chat">
-                        <span> We have to Assign A new Member </span>
-                      </figcaption>
-                      <p class="time-stamp">Halpert|11:30pm</p>
-                    </div>
-                  </div>
                 </div>
               </div>
+
+
+
+
+              <!-- input part -->
+
               <div class="type-box">
                 <div class="type-container">
                   <div class="type-group">
-                    <form action="post" id="image-form">
+                    <form  id="image-form">
                       <label
                         class="attach-img"
                         id="image-upload-label"
@@ -177,8 +128,7 @@
                           name="picture"
                           type="file"
                           id="file-upload"
-                          name=""
-                        />
+                         />
 
                         <span
                           class="iconify"
@@ -187,8 +137,9 @@
                         ></span>
                       </label>
                     </form>
-                    <div class="pr-4"></div>
-                    <div class="d-flex fake-text-field">
+                    <form>
+                     <div class="pr-4"></div>
+                     <div class="d-flex fake-text-field">
                       <div id="emoji">
                         <span
                           class="iconify"
@@ -200,16 +151,22 @@
                         type="text"
                         placeholder="Type your messages"
                         class="text-field"
+                        id="chatinput"
                       />
                       <div>
                         <!-- add onclick function to send message -->
-                        <span
+                         <button style=" border: 0px white; background-color:transparent;"> 
+                          <span
                           class="iconify"
                           data-icon="fluent:send-24-filled"
                           data-inline="false"
+                        
                         ></span>
+                        </button>
                       </div>
-                    </div>
+                      </form>
+                     </div>
+                    <!-- </form> -->
                   </div>
                 </div>
               </div>
@@ -217,3 +174,4 @@
           </div> 
 
           <%- include ('memberssection.ejs')%>
+          </div>

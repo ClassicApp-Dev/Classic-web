@@ -28,7 +28,18 @@ const interestFunctions = {
                     response2 = {};   
                     response2.interests = [];
                 }
-                callback(false,{allInterests:response.interests,joinedInterests:response2.interests})
+                var joinedInterestsData = {};
+                    function loopInterests(i,array){
+                        if(i<array.length){
+                            interestId = response2.interests[i].interest_id;
+                            onlineMembers = response2.interests[i].membersOnline;
+                            joinedInterestsData[interestId] = {interestName:response2.interests[i].interest_name,interestMembers:response2.interests[i].members,onlineMembers:onlineMembers}
+                            loopInterests((i+1),array)
+                        }else{
+                            callback(false,{allInterests:response.interests,joinedInterests:response2.interests,joinedInterestsData:joinedInterestsData})
+                        }
+                    }
+                    loopInterests(0,response2.interests);
             });
         });
     },
@@ -64,6 +75,20 @@ const interestFunctions = {
        });
      },
      
+     getInterestMessages: async function(param,callback){
+        axios.get("http://50.18.102.80:3000/interests/"+param.interestId+"/messages",{
+            httpsAgent: httpsAgent,
+            headers:{ Authorization : 'Bearer '+param.token}
+        }).then((response)=>{
+            callback(false,response.data);
+        }).catch((err)=>{
+            if(err.response.data){
+                callback(err.response.data,false)
+            }else{
+                callback({error:1, message:"error encountered"},false)
+            }
+      });
+     },
 
      joinInterest: async function(param,callback){
         axios.post("http://50.18.102.80:3000/interests/"+param.interestId+"/join",{},{

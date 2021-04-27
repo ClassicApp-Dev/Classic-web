@@ -28,7 +28,6 @@ route.post("/loginuser",urlencodedParser,(req,res)=>{
             res.redirect('/login?e=1');
             
         }else{
-            console.log(response)
             var sess= req.session;
             sess.email = response.email;
             sess.token = response.token;
@@ -116,6 +115,7 @@ route.post("/updateprofile",urlencodedParser,(req,res)=>{
     var details = JSON.parse(JSON.stringify(req.body));
     details['location'] = (details.location==undefined)?req.session.location:details.location;
     details['description'] = (details.description==undefined)?req.session.description:details.description;
+    details['coverPhoto'] = (details.coverPhoto==undefined)?req.session.coverPhoto:details.coverPhoto;
     profile.updateprofile({...details, ...{token:req.session.token}}, async (error,response)=>{
         if (error){
            res.redirect('/profile');
@@ -126,7 +126,26 @@ route.post("/updateprofile",urlencodedParser,(req,res)=>{
            
             sess.location = details.location;
             sess.description = details.description;
+            sess.coverPhoto = details.coverPhoto
             
+           res.redirect("/profile");
+        }
+    });
+});
+
+route.post("/updateprofilecover",urlencodedParser,(req,res)=>{
+        // var formData = new FormData();
+        // var imagefile = document.querySelector('#file');
+        // formData.append("image", imagefile.files[0]);
+
+    var details = JSON.parse(JSON.stringify(req.body));
+    details['coverPhoto'] = (details.coverPhoto==undefined)?req.session.coverPhoto:details.coverPhoto;
+    profile.updateprofile({...details, ...{token:req.session.token}}, async (error,response)=>{
+        if (error){
+           res.redirect('/profile');
+        }else{
+          var sess = req.session;           
+          sess.coverPhoto = details.coverPhoto            
            res.redirect("/profile");
         }
     });
@@ -137,6 +156,16 @@ route.get("/getfeedbacks",(req,res)=>{
     console.log("gotten feedback");
     feedback.getfeedbacks({token:req.session.token,feedbackId:req.session.id},(error,response)=>{
         res.redirect("/feedback")
+    });
+});
+
+route.get("/getInterestMessages/:id",(req,res)=>{
+    interest.getInterestMessages({token:req.session.token,interestId:req.params.id},(error,response)=>{
+        if(!error){
+            res.status(200).json(response.messages);
+        }else{
+            res.status(200).json([]);
+        }
     });
 });
 

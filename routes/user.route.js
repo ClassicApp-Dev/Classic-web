@@ -19,6 +19,7 @@ route.get("/chat-interest",async(req,res)=>{
     var sess = req.session;
     if (sess.token){
         await interest.loadInterestData({token:sess.token,_id:sess._id}, async (err,response)=>{
+            sess.joinedInterestsData = response.joinedInterestsData;
             res.render("base",{
                 email:sess.email, 
                 username:sess.username,
@@ -26,9 +27,11 @@ route.get("/chat-interest",async(req,res)=>{
                 coverphoto:sess.coverPhoto,
                 description:sess.description,
                 location:sess.location,
+                token:sess.token,
                 subRoute:'interestsection.ejs',
                 interests:response.allInterests,
                 joined:response.joinedInterests,
+                storeData:response.joinedInterestsData,
             });
         });
     }else{
@@ -36,11 +39,12 @@ route.get("/chat-interest",async(req,res)=>{
     }
 });
 
-route.get("/chat-messages",async(req,res)=>{
+route.get("/chat-messages/:interest",async(req,res)=>{
     // var online = await sessionManager.getSession();
     var sess = req.session;
     if (sess.token){
-        await interest.loadInterestData({token:sess.token,_id:sess._id}, async (err,response)=>{
+        res.status(200).json(sess.joinedInterestsData);
+        /*await interest.loadInterestData({token:sess.token,_id:sess._id,interestName:req.params.interest}, async (err,response)=>{
             res.render("base",{
                 email:sess.email, 
                 username:sess.username,
@@ -48,12 +52,13 @@ route.get("/chat-messages",async(req,res)=>{
                 coverphoto:sess.coverPhoto,
                 description:sess.description,
                 location:sess.location,
+                token:sess.token,
                 subRoute:'chatsection.ejs',
                 interests:response.allInterests,
-                joined:response.joinedInterests
-
+                joined:response.joinedInterests,
+                //interestData:{ ...response.interestData, ...{interestName:req.params.interest}}
             });
-        });
+        });*/
     }else{
         res.redirect("/login")
     }
@@ -106,6 +111,7 @@ route.get("/forgetpassword",(req,res)=>{
 
 route.get("/login",async (req,res)=>{
     // var online = await sessionManager.getSession();
+    console.log(req.session);
     var sess= req.session;
     if (sess.token){
         res.redirect("/profile")
@@ -127,9 +133,10 @@ route.get("/profile",async(req,res)=>{
                 email:sess.email, 
                 username:sess.username,
                 avatarPhoto:sess.avatarPhoto,
-                coverphoto:sess.coverPhoto,
+                coverPhoto:sess.coverPhoto,
                 location:sess.location,
                 description:sess.description,
+                token:sess.token,
                 subRoute:'profilesection.ejs',
                 interests:response.allInterests,
                 joined:response.joinedInterests
