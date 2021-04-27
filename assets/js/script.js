@@ -26,9 +26,11 @@ profileIcon.click(function () {
 
 var chatIcon = $(".chat-search-icon");
 var chatForm = $("form.chat-search");
+var chatText = $(".chat-intro");
 
 chatIcon.click(function () {
   chatForm.toggleClass("open");
+  chatText.toggleClass("dnone");
   if (chatForm.hasClass("open")) {
     chatForm.children("input.chat-search").focus();
   }
