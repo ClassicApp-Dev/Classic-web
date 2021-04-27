@@ -134,6 +134,12 @@
   width: 102px;
   height: 102px;
 }
+
+.dp-holder img {
+  width: 102px;
+  height: 102px;
+  border-radius: 50%;
+}
 .number-badge {
   position: relative;
   left: 50%;
