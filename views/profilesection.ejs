@@ -1,4 +1,3 @@
-      
           <!-- profile  section -->
           <div class="chat-messages_2 profile">
             <div class="cover-img" id="coverP">
@@ -43,17 +42,25 @@
                   </div>
                 </div>
                 <div class="profile-icons-edit-cover">
-                  <form method="POST" action="/updateprofilecover" id="cover-img-form">
-                  <label for="file-upload">
-                    <input
-                      accept="image/*"
-                      name="coverPhoto"
-                      type="file"
-                      id="cover-upload"
-                      
-                     />
-                  </label>
-                  <img src="assets/svgs/yellow-edit.svg" alt="" />
+                  <form method="POST"  id="profile-img-form" enctype="multipart/form-data">
+                    <label
+                        class="edit-cover-img"
+                        id="cover-upload-label"
+                        for="cover-upload"
+                    >
+                      <input
+                        accept="image/*"
+                        name="cover"
+                        type="file"
+                        id="cover-upload"
+                        onChange="getfile(event)"/>
+
+
+                      <img src="assets/svgs/yellow-edit.svg"
+                      class="img-fluid"
+                      alt=""
+                      />
+                    </label>
                   </form>
                 </div>
               </div>
@@ -71,6 +78,8 @@
                   <input  accept="image/*" name="picture" type="file" id="file-upload" name="">
                   UPLOAD PHOTO
                 </label> -->
+
+                <form method="POST" id="cover-img-form" enctype="multipart/form-data">
                   <label
                     class="edit-profile-img"
                     id="image-upload-label"
@@ -81,8 +90,7 @@
                       name="picture"
                       type="file"
                       id="file-upload"
-                      
-                    />
+                      onChange="handleFile(event)"/>
 
                     <img
                       src="assets/svgs/red-edit.svg"
@@ -104,7 +112,7 @@
                   <figcaption class="edit-option">
                     <span>Description</span>
                   </figcaption>
-                  <p class="details"> <%= description %> 
+                  <p class="details"> <%= description %>
                   </p>
                   </div>
                   <div>
@@ -127,7 +135,7 @@
                     </p>
                   </div>
                   <div>
-                   
+
                     <p
                       type="button"
                       data-toggle="modal"
@@ -213,7 +221,7 @@
                   >
                     Edit Description
                   </h4>
-                  
+
                 </div>
                 <div class="modal-body">
                   <div>
@@ -224,7 +232,7 @@
                         placeholder="About me"
                         name="description"
                        />
-                    
+
                       <div class="modal-footer">
                       <button
                          type="button"
@@ -235,7 +243,7 @@
                       </button>
                      <button
                        type="submit"
-                      class="modal-button" 
+                      class="modal-button"
                       onclick="updateprofile()"
                       >
                       Save changes
@@ -267,7 +275,7 @@
                     >
                       Edit UserName
                     </h4>
-                  
+
                   </div>
                   <div class="modal-body">
                     <div>
@@ -350,7 +358,7 @@
               </div>
             </div> -->
 
-            
+
             <!-- modal for location -->
             <div
               class="modal fade"
@@ -369,7 +377,7 @@
                     >
                       Edit Location
                     </h4>
-                    
+
                   </div>
                   <div class="modal-body">
                     <div>
@@ -380,7 +388,7 @@
                           placeholder="Ontario, Canada"
                           name="location"
                          />
-                      
+
                         <div class="modal-footer">
                         <button
                            type="button"
@@ -391,7 +399,7 @@
                         </button>
                        <button
                          type="submit"
-                        class="modal-button" 
+                        class="modal-button"
                         onclick="updateprofile()"
                         >
                         Save changes
@@ -409,3 +417,4 @@
           <script>
             setCover(document.getElementById('coverPath').innerHTML);
           </script>
+           <div class="lds-dual-ring overlay"></div>

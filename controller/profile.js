@@ -14,8 +14,6 @@ const profileFunctions = {
         httpsAgent: httpsAgent,
         headers:{ Authorization : 'Bearer '+param.token},
     }).then((response)=>{
-        console.log("got here");
-        console.log(response)
         callback(false,response.data);
     }).catch((err)=>{
         console.log(err)
@@ -27,14 +25,14 @@ const profileFunctions = {
     });
     },
 
-    updateprofilecover : async function(param, callback) {
-        axios.post("http://50.18.102.80:3000/users/profile",{type:"upload" , coverPhoto:param.coverPhoto},{
+    updateprofilephoto : async function(param, callback) {
+        console.log("gotten inside update profile pic")
+       await axios.post("http://50.18.102.80:3000/users/profile",{type:"upload" , avatarPhoto:param.avatarPhoto},{
         httpsAgent: httpsAgent,
+        
         headers:{ 
             Authorization : 'Bearer '+param.token},
-        // test part \/\/\/\/\/\/\/\/\/\/\/\/
-            'accept': 'application/json',
-            'Content-Type': 'multipart/form-data',
+            "content-type": "multipart/form-data",
     }).then((response)=>{
         callback(false,response.data);
     }).catch((err)=>{
@@ -46,6 +44,21 @@ const profileFunctions = {
         }                 
     });
     },
+    
+    refreshprofile: async function(param,callback){
+        axios.get("http://50.18.102.80/users/"+param._id,{
+            httpsAgent: httpsAgent,
+            headers:{ Authorization : 'Bearer '+param.token}
+        }).then((response)=>{
+            callback(false,response.data);
+        }).catch((err)=>{
+            if(err.response.data){
+                callback(err.response.data,false)
+                console.log(err)
+            }else{
+                callback({error:1, message:"error encountered"},false)
+            }
+      });
+     },
 };
-
 module.exports = profileFunctions

@@ -179,6 +179,19 @@
   margin: 10px 0 10px 0;
 }
 
+.image-chat {
+  font-size: 10px !important;
+  background: #f2f4ff 0% 0% no-repeat padding-box;
+  border-radius: 4px 20px 20px 4px;
+  width: 220px;
+  padding: 10px;
+  margin: 10px 0 10px 0;
+}
+
+.image-chat img {
+  width:100%;
+}
+
 .time-stamp {
   font-size: 9px;
   color: grey;
@@ -302,7 +315,7 @@
   align-self: center;
 }
 
-/* 
+/*
 .nav-tabs .nav-link.active {
     border-bottom: 5px solid #fff;
     background-color: rgba(255,255,255,.1);

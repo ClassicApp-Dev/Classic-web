@@ -30,9 +30,8 @@ const loginFunctions = {
             }
                           
         });
-
-
     },
+
     postlogout : async function(token){
         axios.get("http://50.18.102.80/users/logout",{
             httpsAgent: httpsAgent,
@@ -42,9 +41,6 @@ const loginFunctions = {
         }).catch((err)=>{
                           
         });
-
-
-    } 
-    
+    }     
 };
 module.exports = loginFunctions

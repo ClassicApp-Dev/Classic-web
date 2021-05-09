@@ -79,14 +79,12 @@ route.get("/feedback",async(req,res)=>{
         var allFeedback = [];
         await feedback.getAllfeedbacks(req.session,(error,resp)=>{
             if(!error){
-                // console.log(resp);
                 for(var i in resp.data){
                     var datetime = new Date(resp.data[i].time);
                     var newDate = datetime.toLocaleString()
                     
                     // resp.data[i].time = newDate;
                     resp.data[i]['timeString'] = newDate;
-                    // console.log(ddate);
                 }
 
                 allFeedback = resp.data;
@@ -117,7 +115,6 @@ route.get("/forgetpassword",(req,res)=>{
 
 route.get("/login",async (req,res)=>{
     // var online = await sessionManager.getSession();
-    console.log(req.session);
     var sess= req.session;
     if (sess.token){
         res.redirect("/chat-interest")
@@ -133,7 +130,7 @@ route.get("/login",async (req,res)=>{
 route.get("/profile",async(req,res)=>{
     var sess = req.session;
     if (sess.token){
-        console.log(sess.profilePhoto)
+        
         res.render("base",{
             email:sess.email, 
             username:sess.username,
@@ -182,8 +179,7 @@ route.get("/base", (req,res)=>{
 // });
 
 
-route.get("/feedbackk",async(req,res)=>{
-    
+route.get("/feedbackk",async(req,res)=>{    
     var sess = req.session;
     if (sess.token){        
                 var allFeedback = [];
@@ -191,12 +187,9 @@ route.get("/feedbackk",async(req,res)=>{
                     if(!error){
                           for(var i in resp.data){
                             var datetime = new Date(resp.data[i].time);
-                            var newDate = datetime.toLocaleString()
-                                               
-                            resp.data[i]['timeString'] = newDate;
-                            
+                            var newDate = datetime.toLocaleString()                                               
+                            resp.data[i]['timeString'] = newDate;                            
                         }
-
                         allFeedback = resp.data;
                     }
                     res.render("base2",{

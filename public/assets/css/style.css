@@ -425,3 +425,8 @@ body {
     font-size: 12px;
   }
 }
+
+#dropdownMenuProfile{
+  background-color: rgb(150, 16, 16);
+  border-radius: 50% 0 0% 50%;
+  }

@@ -13,6 +13,13 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/assets/css/flex.css" />
     <link rel="stylesheet" href="/assets/css/avatar.css" />
+    <link rel="stylesheet" href="/assets/css/loading.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+
+
+
+
 
     <title>chat</title>
   </head>
@@ -31,7 +38,80 @@
                 />
               </div>
               <div class="chat-head-icons">
-                <div class=""><img src="/assets/svgs/add.svg" alt="" /></div>
+                <!-- create interest starts-->
+                <div
+                      type="button"
+                      data-toggle="modal"
+                      data-target="#createinterest"
+                      class="edit-link"
+                >
+                  <img src="/assets/svgs/add.svg"
+                   alt=""/>
+
+                </div>
+                <!-- create interest ends here -->
+
+
+
+                <!-- create interest modal -->
+                <div
+                class="modal fade"
+                id="createinterest"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="editName"
+                aria-hidden="true"
+              >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="">
+                    <h4
+                      class="text-center font-weight-bold pt-3"
+                      id="exampleModalLongTitle"
+                    >
+                      Create Interest
+                    </h4>
+
+                  </div>
+                  <div class="modal-body">
+                    <div>
+                      <form method="POST" action="/createinterest" class="form-group" >
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Interest Name"
+                          name="name"
+                         />
+
+                        <div class="modal-footer">
+                        <button
+                           type="button"
+                           class="modal-button"
+                          data-dismiss="modal"
+                        >
+                          Cancel
+                        </button>
+                       <button
+                         type="submit"
+                        class="modal-button"
+
+                        >
+                        Create
+                      </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              </div>
+
+                <!-- create interest modal ends here -->
+
+
+
+                <!--search icon lies below  -->
                 <div class="d-flex">
                   <img
                     class="search-icon"
@@ -127,7 +207,7 @@
 
                       <% for(var i = 0; i<joined.length; i++ ){ %>
                         <!--<a href="/chat-messages/<%= joined[i].interest_name %>" class="link-to-page">-->
-                          <a href="javascript:void()" data-interest="<%= joined[i].interest_id %>" class="link-to-page open-chat">
+                          <a href="javascript:void(0)" data-interest="<%= joined[i].interest_id %>" class="link-to-page open-interest-chat">
                           <div class="chat-block" data-interest='<%= joined[i].interest_id %>'>
                             <div class="chat-block_flex">
                               <div class="chat-block_flex_img_container">
@@ -139,14 +219,14 @@
                                 <span class="total-members" data-interest="<%= joined[i].interest_id %>"><%= joined[i].memberCount %> </span>
                               </div>
                               <div>
-                               
+
                                 <strong><%= joined[i].interest_name %></strong>
-                                <figcaption class="chat-intro">
-                                  
+                                <figcaption class="chat-intro last-message" data-interest="<%= joined[i].interest_id %>">
+
                                 </figcaption>
                               </div>
                               <div>
-                                <figcaption><b>11:00PM</b></figcaption>
+                                <figcaption class="last-message-time" data-interest="<%= joined[i].interest_id %>"><b></b></figcaption>
                                 <figcaption style='display:none;' class="unreadCont" data-interest="<%= joined[i].interest_id %>">
                                   <div class="number-badge unread" data-interest="<%= joined[i].interest_id %>"></div>
                                 </figcaption>
@@ -267,7 +347,7 @@
         </div>
       </div>
     </section>
-
+    <script src="/assets/js/compressor.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

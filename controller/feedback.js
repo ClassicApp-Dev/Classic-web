@@ -29,7 +29,6 @@ const feedbackFunctions = {
             httpsAgent: httpsAgent,
             headers:{ Authorization : 'Bearer '+param.token}
         }).then((response)=>{
-            console.log(response)
             callback(false,response.data);
         }).catch((err)=>{
             if(err.response.data){
@@ -47,7 +46,6 @@ const feedbackFunctions = {
          }).then((response)=>{
              callback(false,response.data);
          }).catch((err)=>{
-              console.log(err)
              if(err.response.data){
                  callback(err.response.data,false)
              }else{

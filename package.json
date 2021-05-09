@@ -11,6 +11,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
+    "compress.js": "^1.1.2",
+    "compressorjs": "^1.0.7",
     "connect-redis": "^5.1.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
@@ -22,6 +24,7 @@
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.6",
     "redis": "^3.1.2",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "ui-preloader": "^1.0.0"
   }
 }

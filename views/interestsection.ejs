@@ -19,7 +19,7 @@
     </div>
   </div>
 
-    
+
           <!-- chat section -->
           <div class="chat-messages_2 message-view" style='display:none;'>
             <div>
@@ -34,10 +34,14 @@
                       />
                     </div>
                     <div class="pl-2">
-                      <strong class='interest-title'></strong>
-                      <figcaption class="chat-intro">
+                      <strong class='interest-title user-alias'></strong>
+                      <figcaption class="chat-intro interest-chat">
                         <span class='member-count'> </span> members , <span class='online-count'></span> online
                       </figcaption>
+                      <figcaption class="chat-intro one-chat" style="display:none;">
+                        <span class="online-stat"> </span>
+                      </figcaption>
+                      <span id="m-cnt" style="display:none;">0</span>
                     </div>
                   </div>
                 </div>
@@ -125,7 +129,7 @@
               <!-- message part -->
 
               <div class="message-box">
-                <div class="messagebody" id="messagebody">                 
+                <div class="messagebody" id="messagebody">
 
                 </div>
               </div>
@@ -149,6 +153,7 @@
                           name="picture"
                           type="file"
                           id="file-upload"
+                          onchange="uploadAttachment(event)"
                          />
 
                         <span
@@ -156,6 +161,7 @@
                           data-icon="subway:pin"
                           data-inline="false"
                         ></span>
+                        
                       </label>
                     </form>
                     <form>
@@ -173,15 +179,16 @@
                         placeholder="Type your messages"
                         class="text-field"
                         id="chatinput"
+                        data-emojiable="true"
                       />
                       <div>
                         <!-- add onclick function to send message -->
-                         <button onclick='sendMessage()' style=" border: 0px white; background-color:transparent;"> 
+                         <button onclick='sendMessage()' type="button" style=" border: 0px white; background-color:transparent;">
                           <span
                           class="iconify"
                           data-icon="fluent:send-24-filled"
                           data-inline="false"
-                        
+
                         ></span>
                         </button>
                       </div>
@@ -192,12 +199,13 @@
                 </div>
               </div>
             </div>
-          </div> 
+          </div>
 
           <%- include ('memberssection.ejs')%>
           </div>
+          <script src="assets/js/attachments.js"></script>
+
           <script>
             localStorage.setItem('interestStore',('<%- JSON.stringify(storeData) %>'));
             localStorage.setItem('activeInterest',null)
           </script>
-

@@ -25,7 +25,12 @@ app.use(session({
   store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl : 260}),
   saveUninitialized: false,
   resave: false,
-  expires: new Date(Date.now() + (30 * 86400 * 1000))
+  expires: new Date(Date.now() + (30 * 86400 * 1000)),
+  cookie:{
+    secure:false,
+    httpOnly: false,
+    maxAge: (new Date(Date.now() + (30 * 86400 * 1000)))
+  }
 }));
 
 // app.use(session({
