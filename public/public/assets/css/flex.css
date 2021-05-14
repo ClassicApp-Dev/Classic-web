@@ -142,21 +142,25 @@ div.body-container {
 /* media queries for flex */
 
 @media screen and (max-width: 768px) {
-  .chat-flex {
+  /* screen is splitted into three sections.  */
+
+  /* chat-interest page */
+
+  .the-flex {
+    /*mother div */
     display: block;
   }
 
-  .dnone {
+  .the-flex .chat-right-side {
     display: none;
   }
+  /* end */
 
-  .dropdown-menu.show {
-    position: fixed !important;
-    transform: translate(0px, 0px) !important;
-    width: fit-content;
-    top: 0px !important;
-    left: 40% !important;
-    will-change: transform;
+  /* for chat-messages, profile,feedback etc */
+
+  .chat-flex {
+    /*mother div */
+    display: block;
   }
 
   .chat-flex .chat-left-side {
@@ -171,6 +175,21 @@ div.body-container {
   .chat-flex .chat-messages_2 {
     display: block;
     width: 100%;
+  }
+
+  /* end */
+
+  .dnone {
+    display: none;
+  }
+
+  .dropdown-menu.show {
+    position: fixed !important;
+    transform: translate(0px, 0px) !important;
+    width: fit-content;
+    top: 0px !important;
+    left: 40% !important;
+    will-change: transform;
   }
 
   .chat-intro span {
