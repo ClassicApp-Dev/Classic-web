@@ -37,24 +37,11 @@
                   alt=""
                 />
               </div>
-              <div class="chat-head-icons">
-                <!-- create interest starts-->
-                <div
-                      type="button"
-                      data-toggle="modal"
-                      data-target="#createinterest"
-                      class="edit-link"
-                >
-                  <img src="/assets/svgs/add.svg"
-                   alt=""/>
 
-                </div>
-                <!-- create interest ends here -->
+              <!-- interest modal -->
 
 
-
-                <!-- create interest modal -->
-                <div
+              <div
                 class="modal fade"
                 id="createinterest"
                 tabindex="-1"
@@ -105,28 +92,45 @@
 
                 </div>
               </div>
-              </div>
-
-                <!-- create interest modal ends here -->
+                </div>
 
 
+              <!-- interest modal -->
 
-                <!--search icon lies below  -->
-                <div class="d-flex">
+             
+
+              <div class="chat-head-icons">
+                <!-- create interest  -->
+                <!-- <div><img src="assets/svgs/add.svg" alt="" /></div> -->
+                <div
+               
+                data-toggle="modal"
+                data-target="#createinterest"
+               
+          >
+            <img src="/assets/svgs/add.svg"
+             alt=""/>
+
+             <!-- create interest ends -->
+
+          </div>
+                <div class="search-bar">
                   <img
                     class="search-icon"
-                    src="/assets/svgs/Icons-search-gray.svg"
+                    src="assets/svgs/Icons-search-gray.svg"
                     alt=""
                   />
 
                   <form class="search" action="">
+                    <!-- <input class="search" type="text" placeholder="Search" /> -->
                     <input class="search" type="text" placeholder="Search" />
                     <img src="/assets/svgs/tick.svg" alt="" />
                     <input class='utk' type='hidden' value='<%= token %>'/>
                     <input class='un' type='hidden' value='<%= username %>'/>
+                    <img src="assets/svgs/tick.svg" alt="" />
                   </form>
                 </div>
-                <div class="dropdown">
+                <div class="dropdown"> 
                   <div
                     type="button"
                     id="dropdownMenuButton"
@@ -135,7 +139,7 @@
                     aria-expanded="false"
                     style="padding: 0; margin-top: 2.5px"
                   >
-                    <img src="/assets/svgs/icons-dark-more.svg" alt="" />
+                    <img src="assets/svgs/icons-dark-more.svg" alt="" />
                   </div>
                   <div
                     class="dropdown-menu"
@@ -149,7 +153,7 @@
                       ></span>
                       Sort By (A/Z,Z/A)
                     </a>
-                    <a class="dropdown-item" href="/feedback">
+                    <a class="dropdown-item" href="#">
                       <span
                         class="iconify"
                         data-icon="codicon:feedback"
@@ -157,7 +161,7 @@
                       ></span>
                       Feedback
                     </a>
-                    <a class="dropdown-item" href="/profile"
+                    <a class="dropdown-item" href="#"
                       ><span
                         class="iconify"
                         data-icon="bytesize:user"
@@ -168,6 +172,9 @@
                   </div>
                 </div>
               </div>
+
+           
+            
             </div>
             <div class="chat-body">
               <nav>
@@ -218,14 +225,14 @@
                                 />
                                 <span class="total-members" data-interest="<%= joined[i].interest_id %>"><%= joined[i].memberCount %> </span>
                               </div>
-                              <div>
+                              <div  class="message-preview">
 
                                 <strong><%= joined[i].interest_name %></strong>
                                 <figcaption class="chat-intro last-message" data-interest="<%= joined[i].interest_id %>">
 
                                 </figcaption>
                               </div>
-                              <div>
+                              <div class="time-and-badge">
                                 <figcaption class="last-message-time" data-interest="<%= joined[i].interest_id %>"><b></b></figcaption>
                                 <figcaption style='display:none;' class="unreadCont" data-interest="<%= joined[i].interest_id %>">
                                   <div class="number-badge unread" data-interest="<%= joined[i].interest_id %>"></div>
