@@ -317,6 +317,7 @@
 
       $('.chat-intro.interest-chat').show();
       $('.chat-intro.one-chat').hide();
+      
       $('.the-flex').addClass('chat-flex');
       $('.the-flex').removeClass('the-flex');
 
@@ -334,10 +335,6 @@
         $('.unread[data-interest='+interest_id+']').html('');
         $('.unreadCont[data-interest='+interest_id+']').css('display','none');
 
-
-        $('.chat-right-side').css('display','none');
-        $('.message-view').css('display','block');
-        $('.members-section').css('display','block');
 
         //Load Interest Messages
 

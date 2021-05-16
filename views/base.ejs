@@ -26,7 +26,11 @@
   <body>
     <section>
       <div>
+        <% if(route=="chat-interest"){ %>
         <div class="the-flex">
+        <% }else{ %>
+        <div class="chat-flex">
+        <% } %>
           <div class="chat-left-side">
             <div class="chat-head">
               <div class="logo">
@@ -153,7 +157,7 @@
                       ></span>
                       Sort By (A/Z,Z/A)
                     </a>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="/feedback">
                       <span
                         class="iconify"
                         data-icon="codicon:feedback"
@@ -161,7 +165,7 @@
                       ></span>
                       Feedback
                     </a>
-                    <a class="dropdown-item" href="#"
+                    <a class="dropdown-item" href="/profile"
                       ><span
                         class="iconify"
                         data-icon="bytesize:user"

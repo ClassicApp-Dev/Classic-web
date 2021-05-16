@@ -149,6 +149,10 @@ div.body-container {
   display: none;
 }
 
+.the-flex .chat-messages_2 {
+  display: none;
+}
+
 /* media queries for flex */
 
 @media screen and (max-width: 768px) {

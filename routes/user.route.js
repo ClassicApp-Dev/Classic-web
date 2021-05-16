@@ -27,7 +27,7 @@ route.get("/chat-interest",async(req,res)=>{
             sess.allInterests = response.allInterests;
             sess.joined = response.joinedInterests;
             res.render("base",{
-                email:sess.email, 
+                email:sess.email,
                 username:sess.username,
                 profilePhoto:sess.profilePhoto,
                 coverphoto:sess.coverPhoto,
@@ -38,6 +38,7 @@ route.get("/chat-interest",async(req,res)=>{
                 interests:response.allInterests,
                 joined:response.joinedInterests,
                 storeData:response.joinedInterestsData,
+                route:'chat-interest'
                 // storedinterest:response.joinedinterestdata=response.joinedInterests
             });
         });
@@ -53,7 +54,7 @@ route.get("/chat-messages/:interest",async(req,res)=>{
         res.status(200).json(sess.joinedInterestsData);
         /*await interest.loadInterestData({token:sess.token,_id:sess._id,interestName:req.params.interest}, async (err,response)=>{
             res.render("base",{
-                email:sess.email, 
+                email:sess.email,
                 username:sess.username,
                 profilePhoto:sess.profilePhoto,
                 coverphoto:sess.coverPhoto,
@@ -75,14 +76,14 @@ route.get("/chat-messages/:interest",async(req,res)=>{
 route.get("/feedback",async(req,res)=>{
     // var online = await sessionManager.getSession();
     var sess = req.session;
-    if (sess.token){       
+    if (sess.token){
         var allFeedback = [];
         await feedback.getAllfeedbacks(req.session,(error,resp)=>{
             if(!error){
                 for(var i in resp.data){
                     var datetime = new Date(resp.data[i].time);
                     var newDate = datetime.toLocaleString()
-                    
+
                     // resp.data[i].time = newDate;
                     resp.data[i]['timeString'] = newDate;
                 }
@@ -90,7 +91,7 @@ route.get("/feedback",async(req,res)=>{
                 allFeedback = resp.data;
             }
             res.render("base",{
-                email:sess.email, 
+                email:sess.email,
                 username:sess.username,
                 profilePhoto:sess.profilePhoto,
                 coverphoto:sess.coverPhoto,
@@ -101,7 +102,8 @@ route.get("/feedback",async(req,res)=>{
                 interests:req.session.allInterests,
                 joined:req.session.joined,
                 feedback:allFeedback,
-                datetime:datetime.toLocaleString()
+                datetime:datetime.toLocaleString(),
+                route:'feedback'
             });
         });
     }else{
@@ -130,9 +132,9 @@ route.get("/login",async (req,res)=>{
 route.get("/profile",async(req,res)=>{
     var sess = req.session;
     if (sess.token){
-        
+
         res.render("base",{
-            email:sess.email, 
+            email:sess.email,
             username:sess.username,
             avatarPhoto:sess.avatarPhoto,
             coverPhoto:sess.coverPhoto,
@@ -142,6 +144,7 @@ route.get("/profile",async(req,res)=>{
             subRoute:'profilesection.ejs',
             interests:req.session.allInterests,
             joined:req.session.joined,
+            route:'profile'
         });
     }else{
         res.redirect("/login")
@@ -174,26 +177,26 @@ route.get("/base", (req,res)=>{
 });
 // route.get("/feedbackk",(req,res)=>{
 //     res.render("feedbacksection",{
-//         feedback:allFeedback,  
+//         feedback:allFeedback,
 //     })
 // });
 
 
-route.get("/feedbackk",async(req,res)=>{    
+route.get("/feedbackk",async(req,res)=>{
     var sess = req.session;
-    if (sess.token){        
+    if (sess.token){
                 var allFeedback = [];
                 await feedback.getAllfeedbacks(req.session,(error,resp)=>{
                     if(!error){
                           for(var i in resp.data){
                             var datetime = new Date(resp.data[i].time);
-                            var newDate = datetime.toLocaleString()                                               
-                            resp.data[i]['timeString'] = newDate;                            
+                            var newDate = datetime.toLocaleString()
+                            resp.data[i]['timeString'] = newDate;
                         }
                         allFeedback = resp.data;
                     }
                     res.render("base2",{
-                        email:sess.email, 
+                        email:sess.email,
                         username:sess.username,
                         profilePhoto:sess.profilePhoto,
                         coverphoto:sess.coverPhoto,

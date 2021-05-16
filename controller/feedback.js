@@ -9,7 +9,7 @@ const httpsAgent = (new https.Agent({
 
 const feedbackFunctions = {
     sendfeedback : async function(param, callback) {
-        
+
         axios.post('http://50.18.102.80:3000/users/sendfeedback',{message:param.message},{
         httpsAgent: httpsAgent,
         headers:{ Authorization : 'Bearer '+param.token},
@@ -20,7 +20,7 @@ const feedbackFunctions = {
             callback(err.response.data,false)
         }else{
             callback({error:1, message:"error encountered"},false)
-        }                 
+        }
     });
     },
 
@@ -50,7 +50,7 @@ const feedbackFunctions = {
                  callback(err.response.data,false)
              }else{
                  callback({error:1, message:"error encountered"},false)
-             }                          
+             }
          });
      },
 };
