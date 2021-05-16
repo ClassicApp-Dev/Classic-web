@@ -317,6 +317,8 @@
 
       $('.chat-intro.interest-chat').show();
       $('.chat-intro.one-chat').hide();
+      $('.the-flex').addClass('chat-flex');
+      $('.the-flex').removeClass('the-flex');
 
       //Prevent double listeners by killing any existing ones
       $('.open-direct-chat').off('click');
@@ -525,7 +527,7 @@
                 }
 
                 $('.last-message-time[data-interest='+store[index]+']').html( '<b>'+ lastMessageTime + '</b>' );
-            }catch(){
+            }catch(err){
 
             }
           }
