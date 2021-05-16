@@ -139,6 +139,16 @@ div.body-container {
   flex-direction: column;
 }
 
+/* controlling the navigations through styles */
+
+.chat-flex .chat-right-side {
+  display: none;
+}
+
+.the-flex .chat-messages_3 {
+  display: none;
+}
+
 /* media queries for flex */
 
 @media screen and (max-width: 768px) {
