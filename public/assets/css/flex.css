@@ -156,6 +156,9 @@ div.body-container {
 /* media queries for flex */
 
 @media screen and (max-width: 768px) {
+  .back-button {
+    display: block;
+  }
   /* screen is splitted into three sections.  */
 
   /* chat-interest page */

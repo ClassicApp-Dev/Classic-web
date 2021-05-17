@@ -281,6 +281,7 @@
 .profile {
   scrollbar-width: thin;
   scrollbar-color: dark;
+  flex-basis: 71% !important;
 }
 
 .type-box {

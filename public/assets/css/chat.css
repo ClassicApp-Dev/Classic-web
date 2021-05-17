@@ -230,6 +230,7 @@
   padding: 10px 0;
   /* width: 100%; */
   max-width: 800px;
+  overflow: hidden;
   /* margin: 25px 10px; */
 }
 
@@ -290,6 +291,7 @@
 .profile {
   scrollbar-width: thin;
   scrollbar-color: dark;
+  flex-basis: 71% !important;
 }
 
 .type-box {
@@ -612,6 +614,30 @@ input:checked + .slider:before {
   padding: 3px;
   max-width: 800px;
   border-radius: 20px;
+}
+
+.back-button {
+  position: fixed;
+  display: none;
+  margin: 5px;
+  color: white;
+  font-size: 25px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  background: var(--app-maroon);
+}
+
+.back-button .iconify {
+  position: relative;
+  top: 10%;
+  /* left: 50%; */
+  transform: translate();
+}
+
+.back-button a {
+  color: white;
 }
 
 .chat-container {
