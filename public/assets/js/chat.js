@@ -562,3 +562,11 @@
         $(this).scrollTop((newScrollHeight - scrollHeight));
       }
     });
+
+
+
+    $("#chatinput").keyup(function(event) {
+      if (event.keyCode == 13) {
+          $("#send").trigger('click');
+      }
+    })
