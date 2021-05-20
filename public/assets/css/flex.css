@@ -156,6 +156,10 @@ div.body-container {
 /* media queries for flex */
 
 @media screen and (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
   .back-button {
     display: block;
   }

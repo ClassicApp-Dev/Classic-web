@@ -26,7 +26,7 @@ profileIcon.click(function () {
 
 var chatIcon = $(".chat-search-icon");
 var chatForm = $("form.chat-search");
-var chatText = $(".chat-intro");
+var chatText = $(".chat-intro-left-side");
 
 chatIcon.click(function () {
   chatForm.toggleClass("open");
@@ -76,3 +76,15 @@ btn.forEach((star) => {
     rate(star.id);
   });
 });
+
+//sidebar
+
+/* Set the width of the side navigation to 250px */
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}

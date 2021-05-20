@@ -161,6 +161,14 @@ div.body-container {
     display: block;
   }
 
+  .back-button {
+    display: block;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
   .the-flex .chat-right-side {
     display: none;
   }
