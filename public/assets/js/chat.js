@@ -1,6 +1,6 @@
 
 
-    const socket = io.connect('https://50.18.102.80/');
+    const socket = io.connect('https://api.classicapp.online/');
 
 
     socket.on('connect', connectUser);
@@ -15,7 +15,7 @@
       var mins = (datetime.getMinutes().toString().length>1)?datetime.getMinutes().toString():('0'+datetime.getMinutes().toString());
       var time  = hrs+':'+mins;
 
-      var attach = ((data.attachment!=undefined)&&(data.attachment!='null')&&(data.attachment!=null))?('<img src="https://50.18.102.80'+data.attachment+'"/>'):'';
+      var attach = ((data.attachment!=undefined)&&(data.attachment!='null')&&(data.attachment!=null))?('<img src="https://api.classicapp.online'+data.attachment+'"/>'):'';
 
 
       // Create image and message boxes
@@ -64,6 +64,7 @@
           if(data.interestId == localStorage.getItem('activeInterest')){
             try{
               $('#messagebody').html( $('#messagebody').html() + generateChat("left",data));
+              document.getElementsByClassName('message-box')[0].scrollTop = document.getElementsByClassName('message-box')[0].scrollHeight;
             }catch(err){}
           }else{
             if(interestStore[data.interestId].unreadMessages == undefined){
@@ -88,6 +89,7 @@
           if((activeUserAlias!=null)&&(activeUserAlias!='null')){
             try{
               $('#messagebody').html( $('#messagebody').html() + generateChat("left",data));
+              document.getElementsByClassName('message-box')[0].scrollTop = document.getElementsByClassName('message-box')[0].scrollHeight;
             }catch(err){}
           }
 
@@ -167,45 +169,56 @@
         var msg = $('#chatinput').val();
 
         var activeInterest = localStorage.getItem('activeInterest');
-        if((activeInterest!='null')&&(activeInterest!=null)){
 
 
-          socket.emit("sendMessage",{message:msg,token:($('.utk').val()),interestId:localStorage.getItem('activeInterest'),type:"interest",attachment:((attachment!=undefined)?attachment:null)},function(data){
-            var messageData = {message:msg,time:data.time_received};
-            if(attachment!=undefined){
-              messageData['attachment'] = attachment;
-            }
-            $('#messagebody').html( $('#messagebody').html() + generateChat("right",messageData));
-          });
-        }else{
-          socket.emit('getUserStat',{alias:$('.user-alias').html()},function(data){
-            socket.emit("sendMessage",{message:msg,token:($('.utk').val()),to:data.username,type:"direct",attachment:((attachment!=undefined)?attachment:null)},function(data){
+        if(msg!=""){
+
+          if((activeInterest!='null')&&(activeInterest!=null)){
+
+
+            socket.emit("sendMessage",{message:msg,token:($('.utk').val()),interestId:localStorage.getItem('activeInterest'),type:"interest",attachment:((attachment!=undefined)?attachment:null)},function(data){
               var messageData = {message:msg,time:data.time_received};
               if(attachment!=undefined){
                 messageData['attachment'] = attachment;
               }
               $('#messagebody').html( $('#messagebody').html() + generateChat("right",messageData));
-
-
-              var userMessages = JSON.parse(localStorage.getItem('userMessages'));
-
-              userMessages[data.fromAlias].push(data);
-
-              localStorage.setItem('userMessages',JSON.stringify(userMessages));
-
+              document.getElementsByClassName('message-box')[0].scrollTop = document.getElementsByClassName('message-box')[0].scrollHeight;
             });
-          });
+          }else{
+            socket.emit('getUserStat',{alias:$('.user-alias').html()},function(data){
+              socket.emit("sendMessage",{message:msg,token:($('.utk').val()),to:data.username,type:"direct",attachment:((attachment!=undefined)?attachment:null)},function(data){
+                var messageData = {message:msg,time:data.time_received};
+                if(attachment!=undefined){
+                  messageData['attachment'] = attachment;
+                }
+                $('#messagebody').html( $('#messagebody').html() + generateChat("right",messageData));
+
+
+                var userMessages = JSON.parse(localStorage.getItem('userMessages'));
+
+                userMessages[data.fromAlias].push(data);
+
+                localStorage.setItem('userMessages',JSON.stringify(userMessages));
+                document.getElementsByClassName('message-box')[0].scrollTop = document.getElementsByClassName('message-box')[0].scrollHeight;
+
+              });
+            });
+
+          }
 
         }
-
-
 
 
         $('#chatinput').val('');
     }
 
     function connectUser () {  // Called whenever a user signs in
-      socket.emit('userConnected', $('.utk').val());
+      socket.emit('userConnected', $('.utk').val(), function(response){
+        //End user session due to expired or invalid token
+        if(response.error){
+          location.replace('/logout');
+        }
+      });
     }
 
     function disconnectUser () {  // Called whenever a user signs out
@@ -317,7 +330,7 @@
 
       $('.chat-intro.interest-chat').show();
       $('.chat-intro.one-chat').hide();
-      
+
       $('.the-flex').addClass('chat-flex');
       $('.the-flex').removeClass('the-flex');
 
@@ -373,7 +386,7 @@
             var addMember = ``;
             var username = $('.un').val();
             if(username!=data[i].username){
-              addMember += `<a href="#" class="open-direct-chat" data-alias="`+data[i].alias+`">`;
+              addMember += `<a href="#" class="open-direct-chat" data-alias="`+data[i].alias+`" data-username="`+data[i].username+`">`;
             }
             addMember += `
             <div class="chat-block">
@@ -386,7 +399,7 @@
                     alt="chat-logo"
                   />
                 </div>
-                <strong class="strong member-name pl-2"> `+data[i].alias + ((username==data[i].username)?'(You)':'') +` </strong>
+                <strong class="strong member-name pl-2"> `+ data[i].username + ((username==data[i].username)?'(You)':'') +` </strong>
               </div>
               <div class="profile-more">
                 <span
@@ -446,6 +459,8 @@
 
         var alias = $(this).attr('data-alias');
 
+        var username = $(this).attr('data-username');
+
         //Set active opened chat alias
         localStorage.setItem('activeUserChatAlias',alias);
         localStorage.setItem('activeInterest',null);
@@ -453,6 +468,8 @@
         var userMessages = JSON.parse(localStorage.getItem('userMessages'));
 
         $('.user-alias').html(alias);
+
+        $('.user-username').html(username);
 
         $('.online-stat').html('');
 
@@ -510,7 +527,7 @@
               /*if((lastMessage.attachment!=null)&&(lastMessage.attachment!='null')){
                 var lastMessageText = '<i class="fas fa-image"></i> Image';
               }else{*/
-                var lastMessageText = lastMessage.message.substr(0,45)+ ((lastMessage.message.length>45)?'...':'');
+                var lastMessageText = lastMessage.message.substr(0,35)+ ((lastMessage.message.length>35)?'...':'');
                 //}
                 $('.chat-intro.last-message[data-interest='+store[index]+']').html( lastMessageText  );
 
@@ -570,3 +587,8 @@
           $("#send").trigger('click');
       }
     })
+
+    $('.back-button.chat-back').click(function(){
+      $('.chat-flex').addClass('the-flex');
+      $('.chat-flex').removeClass('chat-flex');
+    });

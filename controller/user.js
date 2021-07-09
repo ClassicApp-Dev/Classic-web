@@ -9,15 +9,15 @@ const createFunctions = require("./createuser");
 const { response } = require("express");
 const redisStore = require('connect-redis')(session);
 const client  = redis.createClient();
-  
+
 const httpsAgent = (new https.Agent({
     rejectUnauthorized:false
 }));
 
 const userFunctions = {
-     
+
      getDirectMessages: async function(param,callback){
-        axios.get("http://50.18.102.80:3000/users/"+param.alias+"/messages",{
+        axios.get("https://api.classicapp.online/users/"+param.alias+"/messages",{
             httpsAgent: httpsAgent,
             headers:{ Authorization : 'Bearer '+param.token}
         }).then((response)=>{
@@ -30,7 +30,7 @@ const userFunctions = {
             }
       });
      },
-};    
+};
 
 
 module.exports = userFunctions

@@ -10,7 +10,7 @@ function uploadAttachment(e) {
             fd.append('attachments',result);
 
             $.ajax({
-                url:"http://50.18.102.80:3000/chat/uploadattachment",
+                url:"https://api.classicapp.online/chat/uploadattachment",
                 data:fd,
                 type:'POST',
                 beforeSend: function(){

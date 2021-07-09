@@ -44,7 +44,7 @@ const interestFunctions = {
         });
     },
     getAllInterests : async function(param, callback) {
-       axios.get("http://50.18.102.80:3000/interests",{
+       axios.get("https://api.classicapp.online/interests",{
             httpsAgent: httpsAgent,
             headers:{ Authorization : 'Bearer '+param.token}
         }).then((response)=>{
@@ -59,7 +59,7 @@ const interestFunctions = {
     },
 
     getjoinedby : async function(param, callback) {
-        axios.get("http://50.18.102.80/interests/joined-by/"+ param._id,{
+        axios.get("https://api.classicapp.online/interests/joined-by/"+ param._id,{
              httpsAgent: httpsAgent,
              headers:{ Authorization : 'Bearer '+param.token}
          }).then((response)=>{
@@ -74,7 +74,7 @@ const interestFunctions = {
      },
 
      getInterestMessages: async function(param,callback){
-        axios.get("http://50.18.102.80:3000/interests/"+param.interestId+"/messages",{
+        axios.get("https://api.classicapp.online/interests/"+param.interestId+"/messages",{
             httpsAgent: httpsAgent,
             headers:{ Authorization : 'Bearer '+param.token}
         }).then((response)=>{
@@ -89,7 +89,7 @@ const interestFunctions = {
      },
 
      joinInterest: async function(param,callback){
-        axios.post("http://50.18.102.80:3000/interests/"+param.interestId+"/join",{},{
+        axios.post("https://api.classicapp.online/interests/"+param.interestId+"/join",{},{
             httpsAgent: httpsAgent,
             headers:{ Authorization : 'Bearer '+param.token}
         }).then((response)=>{
@@ -104,7 +104,7 @@ const interestFunctions = {
      },
 
      createinterest : async function(param, callback) {
-        axios.post('http://50.18.102.80:3000/interests/create',{name:param.name},{
+        axios.post('https://api.classicapp.online/interests/create',{name:param.name},{
             httpsAgent: httpsAgent,
             headers:{ Authorization : 'Bearer '+param.token}
         }).then((response)=>{

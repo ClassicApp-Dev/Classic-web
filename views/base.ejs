@@ -229,18 +229,20 @@
                                 />
                                 <span class="total-members" data-interest="<%= joined[i].interest_id %>"><%= joined[i].memberCount %> </span>
                               </div>
-                              <div  class="message-preview">
+                              <div class="d-flex flex-row cty">
+                                <div  class="message-preview">
 
-                                <strong><%= joined[i].interest_name %></strong>
-                                <figcaption class="chat-intro last-message" data-interest="<%= joined[i].interest_id %>">
+                                  <strong><%= joined[i].interest_name %></strong>
+                                  <figcaption class="chat-intro last-message" data-interest="<%= joined[i].interest_id %>">
 
-                                </figcaption>
-                              </div>
-                              <div class="time-and-badge">
-                                <figcaption class="last-message-time" data-interest="<%= joined[i].interest_id %>"><b></b></figcaption>
-                                <figcaption style='display:none;' class="unreadCont" data-interest="<%= joined[i].interest_id %>">
-                                  <div class="number-badge unread" data-interest="<%= joined[i].interest_id %>"></div>
-                                </figcaption>
+                                  </figcaption>
+                                </div>
+                                <div class="time-and-badge">
+                                  <figcaption class="last-message-time" data-interest="<%= joined[i].interest_id %>"><b></b></figcaption>
+                                  <figcaption style='display:none;' class="unreadCont" data-interest="<%= joined[i].interest_id %>">
+                                    <div class="number-badge unread" data-interest="<%= joined[i].interest_id %>"></div>
+                                  </figcaption>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -287,7 +289,7 @@
                           class="add-icon-container"
                           type="button"
                           data-toggle="modal"
-                          data-target="#addInterest<%= interests[i].name %>"
+                          data-target="#addInterest<%= interests[i].name.replace(' ','') %>"
                           class="edit-link"
                           class="edit-link"
                         >
@@ -301,7 +303,7 @@
                       <!-- modal for adding interest -->
                       <div
                         class="modal fade"
-                        id="addInterest<%= interests[i].name %>"
+                        id="addInterest<%= interests[i].name.replace(' ','') %>"
                         tabindex="-1"
                         role="dialog"
                         aria-labelledby="editName"
@@ -367,7 +369,7 @@
     <script src="/assets/js/custom.js"></script>
     <script src="/assets/js/custom2.js"></script>
     <script src="/assets/js/custom3.js"></script>
-    <script src="https://50.18.102.80/socket.io/socket.io.js"></script>
+    <script src="https://api.classicapp.online/socket.io/socket.io.js"></script>
     <script src="/assets/js/chat.js"></script>
   </body>
 </html>

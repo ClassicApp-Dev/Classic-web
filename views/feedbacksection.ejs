@@ -1,11 +1,11 @@
 <!--feedback section-->
-         
+
           <div class="chat-messages_2">
             <div class="chat-container">
-             
+
               <div class="messages-head d-flex justify-content-between">
-                <div class="back-button">
-                  <a href="">
+                <div class="back-button" style="margin-top:20px;">
+                  <a href="#" onclick="goBack()">
                     <span class="iconify" data-icon="iwwa-arrow-left" data-inline="false"></span>
                   </a>
                 </div>
@@ -26,10 +26,10 @@
               </div>
               <hr />
 
-               
+
               <div id="feedback-chat">
                 <div class="msnger-chat">
-                 
+
                   <% if( feedback.length>0){ %>
                     <% for(var i = 0; i<feedback.length; i++ ){ %>
                   <div class="feedback-msg">
@@ -44,14 +44,14 @@
                   <% } %>
                   <% }else{ %>
                       <h6 style="text-align: center;padding-top: 10px;"> no feedback sent
-             <% } %> 
+             <% } %>
 
                   <!-- <div class="reply-msg">
                     <span>We (Classic) have received the feedback</span>
                   </div> -->
                 </div>
               </div>
-                      
+
               <div class="type-box">
                 <div class="type-container">
                   <div class="type-group">

@@ -9,7 +9,7 @@ const httpsAgent = (new https.Agent({
 }));
 
 const createFunctions = {
-    
+
     validateEmail: function (email) {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
@@ -18,7 +18,7 @@ const createFunctions = {
     createuser : async function(param, callback) {
         if (this.validateEmail(param.email)){
             if (param.password==param.confirm){
-            axios.post('http://50.18.102.80:3000/users/create',{
+            axios.post('https://api.classicapp.online/users/create',{
             username:param.username,
             email:param.email,
             gender:param.gender,
@@ -33,7 +33,7 @@ const createFunctions = {
                 callback(err.response.data,false)
             }else{
                 callback({error:1, message:"error encountered"},false)
-            }                       
+            }
         });
             }else{
                 callback({error:1,message:"passwords are not thesame"},false)
@@ -41,11 +41,11 @@ const createFunctions = {
         }else{
             callback({error:1,message: "email address incorect"},false)
         }
-        // Workaround to solve wrong route issue       
+        // Workaround to solve wrong route issue
     },
-    
+
     resendCode : function(email){
-        axios.post('http://50.18.102.80:3000/users/resendcode',{
+        axios.post('https://api.classicapp.online/users/resendcode',{
             email:email
         }).then(async (response)=>{
             var session = await sessionManager.getSession();
